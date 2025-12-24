@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function Card({
+export function Home({
 
 }){
     return (
-        <h1>hola</h1>
+        <h1>hola mundo</h1>
     )
 }
