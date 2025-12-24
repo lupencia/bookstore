@@ -4,6 +4,10 @@ export function Home({
 
 }){
     return (
-        <h1>hola mundo</h1>
+        <>
+         <h1>Página de inicio</h1>
+         <button>Página de inicio</button>
+        </>
+       
     )
 }

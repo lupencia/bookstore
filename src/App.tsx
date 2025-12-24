@@ -9,13 +9,9 @@ function App() {
   return (
     <BrowserRouter>
         <Link to="/card" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-          <p>Página Card</p>
+          <button>Página Card</button>
         </Link>
-        <Link to="/" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-          <p>Página de inicio</p>
-        </Link>
+        <Link to="/" target="_blank"/>
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/card' element={<Card/>}/>
