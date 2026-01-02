@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default function Header({
     
 }) {
     return (
     <header className="bookstore-header">
-        <a className="bookstore-home" href="../Home.tsx">Home</a>
-        <a className="bookstore-card" href="./Card.tsx">Card</a>
+        <Link className="bookstore-home" to="/">Home</Link>
+        <Link className="bookstore-card" to="/card">Card</Link>
     </header>
     )
 }

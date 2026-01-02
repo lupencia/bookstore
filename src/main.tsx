@@ -5,14 +5,25 @@ import {
   RouterProvider,
 } from 'react-router';
 import './index.css'
+import { Home } from './Home.tsx';
+import Card from './components/Card.tsx';
 import App from './App.tsx';
 
 const router = createBrowserRouter([
   {
   path: '/',
-  element: <App/>
-  }
-  
+  Component: App,
+  children:[
+    {
+      path: '/',
+      element: <Home/>
+    },
+    {
+      path: '/card',
+      element: <Card/>
+    },
+  ] 
+  },
 ])
 
 createRoot(document.getElementById('root')!).render(

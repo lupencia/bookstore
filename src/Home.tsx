@@ -1,41 +1,41 @@
 import React, { type ReactNode } from 'react';
 import Card, { type CardProps } from './components/Card';
+import { Hero } from './components/Hero';
 
-export function Home({
- cards = [
+const handleCardButton = () => console.log('pepe');
+const hable1Button = () => alert('hola')
+
+const cards:  CardProps[] = [
     {
-                title: 'nombres',
-                description: 'Texto largo de la 1ª opción para comprobar la consistencia del componente',
-                //onClick: {()=> void}
-            },
-              {
-                title: 'nombres 2',
-                description: 'Texto largo de la 1ª opción para comprobar la consistencia del componente',
-                //onClick: {()=> void}
-            },
-              {
-                title: 'nombres 3',
-                description: 'Texto largo de la 1ª opción para comprobar la consistencia del componente',
-                //onClick: {()=> void}
-            },
- ],
- title,
- onClick,
- onClickCard
+        title: 'nombres',
+        description: 'Texto largo de la 1ª opción para comprobar la consistencia del componente',
+        onClick: hable1Button,
+
+    },
+        {
+        title: 'nombres 2',
+        description: 'Texto largo de la 1ª opción para comprobar la consistencia del componente',
+        onClick: handleCardButton,
+
+    },
+        {
+        title: 'nombres 3',
+        description: 'Texto largo de la 1ª opción para comprobar la consistencia del componente',
+       onClick: handleCardButton,
+
+    },
+]
+export function Home({
+
 }: HomeProps){
+    const handleClick = ()=> console.log('button check')
+    
     return (
         <>
-        <section className='flex-col items-center justify-center'>
-            <h1>{title}</h1>
-            <label className='block' htmlFor="findread">Find Your Next Great Read</label>
-            <input className='min-w-3xs rounded-lg
- p-2 border-1 border-cyan-900 border-solid' type="text" name='findread' id='findread' placeholder='Search by title, author, or ISBN...'/>
-            <button onClick={onClick} className='bg-blue-500 p-2 border-cyan-900'>Search</button>
-        </section>
-         
+        <Hero title='Page title' label='Find your book' text='search' placeholder='Find your book' onClick={handleClick}/>
          <section className='grid grid-cols-4 gap-4'>
-            {cards.map((elem) =>(
-                <Card title={elem.title} description={elem.description} onClick={onClickCard}/>
+            {cards.map((elem: CardProps) =>(
+                <Card key={elem.title} title={elem.title} description={elem.description} onClick={elem.onClick}/>
             ))}
          </section>
         </>
@@ -43,9 +43,6 @@ export function Home({
     )
 }
 
-export type HomeProps = CardProps & {
-    cards?: CardProps[];
-    title?: string;
-    onClick?: ()=> void;
-    onClickCard? :  ()=> void;
+export type HomeProps = {
+    
 }
