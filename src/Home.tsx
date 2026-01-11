@@ -1,6 +1,8 @@
 import React, { type ReactNode } from 'react';
 import Card, { type CardProps } from './components/Card';
 import { Hero } from './components/Hero';
+import { searchBooks } from './services/api';
+
 
 const handleCardButton = () => console.log('pepe');
 const hable1Button = () => alert('hola')
@@ -28,11 +30,17 @@ const cards:  CardProps[] = [
 export function Home({
 
 }: HomeProps){
-    const handleClick = ()=> console.log('button check')
+    const {data, loading} = searchBooks('https://www.googleapis.com/books/v1/volumes?q={search}');
+
+    const handleClick = ()=> {console.log('button check')}
     
     return (
         <>
         <Hero title='Page title' label='Find your book' text='search' placeholder='Find your book' onClick={handleClick}/>
+        {loading && <li>Loading...</li>}
+        {data.map((item)=> {
+            <li key={item.id}>{ClipboardItem.name}</li>
+        })}
          <section className='grid grid-cols-4 gap-4'>
             {cards.map((elem: CardProps) =>(
                 <Card key={elem.title} title={elem.title} description={elem.description} onClick={elem.onClick}/>
