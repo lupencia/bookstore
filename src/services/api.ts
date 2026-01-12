@@ -1,20 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Book } from "../types/Book";
 
-export function searchBooks(url: string,) {
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    useEffect(()=> {
-        setLoading(true);
-        fetch(url)
-        .then(response => response.json())
-        .then(data => setData(data))
-        //método de fetch que se usa cuando se ha terminado de hacer todas las llamadas
-        .finally(()=> setLoading(false))
-    }, [])
-
-    return {data, loading} 
-}
 
 // Paso 1: Importaciones y Constantes
 // Necesitas definir qué tipo de datos vas a manejar y a dónde vas a llamar.
