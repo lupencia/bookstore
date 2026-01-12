@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
-import type { Book } from "../types/Book";
+//Aquí tienes un ejemplo de implementación de un padrón de deseño muy común en proyectos para manejar llamadas a una API externa.
+//Se crea un archivo api.ts en la carpeta services donde se definen funciones para interactuar con la API.
 
+//Las vantajas de usar este patrón incluyen:
+//1. Centralización de la lógica de llamadas a la API, lo que facilita el mantenimiento y las actualizaciones.
+//2. Reutilización de código en diferentes partes de la aplicación.
+//3. Mejora de la legibilidad del código al abstraer los detalles de las llamadas a la API.
+import { ProductList } from '../types/Product';
+import { Product } from '../types/Product';
 
-// Paso 1: Importaciones y Constantes
-// Necesitas definir qué tipo de datos vas a manejar y a dónde vas a llamar.
+// Define la URL base de la API (lo que normalmente se repite en todas las llamadas)
+const BASE_URL = 'https://api.example.com';
 
-// Instrucción: Importa el tipo Book (que debes tener definido en tus tipos) y define la URL base de la API para no tener que escribirla repetidamente.
+// Función para obtener un listado de productos desde la API (en nuestro caso libros y enviamos un parámetro de búsqueda para que nos devuelva una lista filtrada de libros)
+export const fetchProducts = async (): Promise<ProductList> => {
+  const response = await fetch(`${BASE_URL}/products`);
+  
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  
+  return response.json();
+};
 
-// Paso 2: Crear la Función de Búsqueda (searchBooks) utilizando la función fetch de JavaScript
-// Esta función será responsable de recibir lo que el usuario escribe y pedirle a Google una lista de libros.
-
-// Conceptos clave:
-// Async/Await: La petición tarda tiempo, por eso la función es asíncrona.
-// Start Index: Necesario para la paginación (cargar más libros).
-
-// Paso 3: Crear la Función de Detalles (getBookDetails) utilizando la función fetch de JavaScript
-// A veces necesitamos ver la inforamción completa de un solo libro. Para ello usamos su ID.
-
-// Instrucción: Crea una función que reciba un id y retorne un solo objeto Book o null si falla.
-
-// Aquí tienes el enlace a la documentación de la API de Google Books para que puedas revisar los detalles técnicos si lo necesitas: https://developers.google.com/books/docs/v1/reference/volumes
-// Vamos trabajar con volumes, que es la parte de la API que maneja los libros.
-// El tipo de dato Book puedes encontrarlo en la section volume resource de la documentación.
-
-// Objetivo del ejercicio: 
-// Implementar dos funciones en TypeScript para interactuar con la API de Google Books: una para buscar libros y otra para obtener detalles de un libro específico. 
-// Entender el patrón "Service Layer" para separar la lógica de negocio de la lógica de presentación.
+// Función para obtener un producto específico por su ID (en nuestro caso un libro)
+export const fetchProductById = async (id): Promise<Product> => {
+  const response = await fetch(`${BASE_URL}/products/${id}`);
+  return response.json();
+};

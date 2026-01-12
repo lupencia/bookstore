@@ -1,3 +1,10 @@
+//este es el tipo para un listado de libros. Para aceder a los libros es data.items que es un array de Book
+type BookList = {
+  kind: string;
+  totalItems: number;
+  items: Book[]
+}
+
 export type Book = {
   kind: string,
   id: string,
