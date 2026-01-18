@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import Card, { type CardProps } from './components/Card';
 import { Hero } from './components/Hero';
-import type { BookList } from './types/Book';
+import type { Book, BookList } from './types/Book';
 import { fetchBooks, fetchByBookId } from './services/api';
 
 const handleCardButton = () => console.log('pepe');
@@ -30,22 +30,27 @@ const cards:  CardProps[] = [
 export function Home({
 
 }: HomeProps){
-   const [data, setData] = useState<BookList| null>();
+   const [data, setData] = useState<Book[]>();
 
    useEffect(()=> {
-        fetchBooks();
-        //setData(data)
+        const bookListResponse: Promise<BookList> = fetchBooks();
+        bookListResponse.then((response: BookList) => {
+            console.log(response.items);
+            setData(response.items);
+        }).catch((error) => {
+            console.error('Error fetching books:', error);
+        });
    }, [])
 
-   const htmlData = data.map((item: BookList)=> {
-        return <li>{item.kind}</li>
-   })
+   const htmlData = data ? data.map((item: Book)=> {
+        return <li>{item.volumeInfo.title}</li>
+   }) : <></>;
    console.log(htmlData)
     return (
         <>
         <Hero title='Page title' label='Find your book' text='search' placeholder='Find your book' onClick={handleCardButton}/>
         {/* Despues que ya tienes el tipo, puedes mapear los datos correctamente con las propiedades que tiene el tipo Book */}
-        {/* //{htmlData} */}
+        {htmlData}
          <section className='grid grid-cols-4 gap-4'>
             {/* Aqui ya puedes modificar el tipo de CardProps para que acepte las propriedades venientes de Book */}
             {cards.map((elem: CardProps) =>(
